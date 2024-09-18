@@ -1,0 +1,26 @@
+Package: jugglePlot
+Title: A Package to Save and Manage Plot Objects with Metadata, Allowing Easy Reloading, Modification, and Assembly of Plots.
+Version: 0.0.0.9000
+Authors@R:
+    person(
+        given = "Matthew",
+        family = "Cannon",
+        email = "matthewvc1@gmail.com",
+        role = c("aut", "cre")
+    )
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports:
+    dplyr,
+    qs
+VignetteBuilder:
+    knitr,
+    quarto

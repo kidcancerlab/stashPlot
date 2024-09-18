@@ -1,0 +1,82 @@
+---
+title: "Basic usage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Basic usage}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+lightbox: true
+---
+
+```{r setup}
+library(jugglePlot)
+library(ggplot2)
+```
+
+## Create some plots to save
+```{r make_some_plots}
+save_plot(
+    ggplot(mtcars, aes(x = mpg, y = wt)) + geom_point(),
+    plot_name = "mpg_wt"
+)
+
+save_plot(
+    ggplot(mtcars, aes(x = mpg, y = qsec)) + geom_point(),
+    plot_name = "mpg_qsec"
+)
+
+save_plot(
+    ggplot(mtcars, aes(x = mpg, y = disp)) + geom_point(),
+    plot_name = "mpg_disp"
+)
+
+save_plot(
+    ggplot(mtcars, aes(x = mpg, y = hp)) + geom_point(),
+    plot_name = "mpg_hp"
+)
+```
+
+## List off the plots we have saved
+```{r list_plots}
+list_plots()
+```
+
+## Display a plot by name
+```{r display_plot}
+get_plot("mpg_wt")
+```
+
+## Assemble plots into a figure
+```{r assemble_plots}
+gridExtra::grid.arrange(
+    get_plot("mpg_wt", verbose = FALSE),
+    get_plot("mpg_qsec", verbose = FALSE),
+    get_plot("mpg_disp", verbose = FALSE),
+    get_plot("mpg_hp", verbose = FALSE),
+    ncol = 2
+)
+```
+
+## Modify a plot while assembling it
+```{r modify_plot}
+gridExtra::grid.arrange(
+    get_plot("mpg_wt", verbose = FALSE) +
+        ggtitle("Miles per gallon vs weight"),
+    get_plot("mpg_qsec", verbose = FALSE) +
+        theme(axis.text = element_text(size = 20)),
+    get_plot("mpg_disp", verbose = FALSE) +
+        theme_bw(),
+    get_plot("mpg_hp", verbose = FALSE) +
+        labs(x = "Miles per gallon", y = "Horsepower") +
+        theme(axis.text = element_text(size = 20)),
+    ncol = 2
+)
+```
+
+## Import a plot that someone else made
+```{r import_plot}
+import_plot(
+    qs_file = "mpg_wt_2024_09_18_11.52.53.qs",
+    user = "Ryan"
+)
+```
