@@ -33,20 +33,20 @@ get_plot <- function(plot_name,
     return(qs::qread(plot_file))
 }
 
-
-
 #' List Plot Files
 #'
 #' This function lists all plot files in the specified directory.
 #'
-#' @param figures_dir A character string specifying the directory where plot files are stored.
-#'                    Default is "output/figure_objs".
+#' @param figures_dir A character string specifying the directory where plot
+#'   files are stored. Default is "output/figure_objs".
 #'
 #' @return A character vector of file names in the specified directory.
 #'
 #' @examples
-#' list_plots()
-#' list_plots("custom/figure_objs")
+#' \dontrun{
+#'   list_plots()
+#'   list_plots("custom/figure_objs")
+#' }
 #'
 #' @export
 list_plots <- function(figures_dir = "output/figure_objs") {

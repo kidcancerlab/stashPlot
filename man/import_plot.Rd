@@ -9,7 +9,8 @@ import_plot(
   figures_dir = "output/figure_objs",
   user = "imported from file",
   cleanup = TRUE,
-  verbose = TRUE
+  verbose = TRUE,
+  overwrite_newer = FALSE
 )
 }
 \arguments{
@@ -27,6 +28,9 @@ when writing out a new plot with the same plot_name. The default is TRUE.}
 
 \item{verbose}{A logical value indicating whether to print messages. The
 default is TRUE.}
+
+\item{force_overwrite}{A logical value indicating whether to overwrite a plot
+file even if the new one is older. The default is FALSE.}
 }
 \value{
 The imported plot object.

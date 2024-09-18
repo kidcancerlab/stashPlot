@@ -87,3 +87,47 @@ metadata_as_df <- function(metadata) {
 
     return(metadata_df)
 }
+
+#' Get Plot File Time
+#'
+#' This function retrieves the timestamp of a given plot file.
+#'
+#' @param plot_qs_file A string representing the path to the plot file.
+#' @param as_string A logical value indicating whether to return the timestamp
+#'   as a string (TRUE) or as a POSIXct object (FALSE). Default is FALSE.
+#'
+#' @return A POSIXct object representing the timestamp of the plot file.
+#'
+#' @keywords internal
+get_plot_file_time <- function(plot_qs_file,
+                               as_string = FALSE) {
+    timestamp <-
+        stringr::str_extract(
+            string = basename(plot_qs_file),
+            pattern = "[0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}"
+        )
+
+    if(as_string) {
+        return(timestamp)
+    } else {
+        return(lubridate::ymd_hms(timestamp))
+    }
+}
+
+#' Extract Plot Name from QS File
+#'
+#' This function retrieves the plot name from a given QS file.
+#'
+#' @param plot_qs_file A string representing the path to the QS file.
+#'
+#' @return A string containing the name of the plot extracted from the QS file.
+#'
+#' @keywords internal
+get_plot_name_from_qs_file <- function(plot_qs_file) {
+    plot_name <-
+        stringr::str_remove(
+            string = basename(plot_qs_file),
+            pattern = "_[0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}\\.qs"
+        )
+    return(plot_name)
+}

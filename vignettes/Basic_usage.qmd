@@ -80,3 +80,42 @@ import_plot(
     user = "Ryan"
 )
 ```
+
+## Import a bunch of plots from another folder
+
+### lets make some plots in a different folder
+```{r make_plots_in_other_folder}
+save_plot(
+    ggplot(mtcars, aes(x = as.factor(cyl), y = wt)) + geom_point(),
+    plot_name = "other_plot_1",
+    figures_dir = "output/other_folder"
+)
+
+save_plot(
+    ggplot(mtcars, aes(x = as.factor(cyl), y = qsec)) + geom_point(),
+    plot_name = "other_plot_2",
+    figures_dir = "output/other_folder"
+)
+```
+
+## Import all plots from another folder
+This will not overwrite the files for any newer plots and those will be skipped
+```{r import_all_plots}
+import_all_qs_plots(
+    from_figures_dir = "output/other_folder",
+    user = "Ryan"
+)
+
+list_plots()
+```
+
+
+## Import all plots from another folder and overwrite newer
+This will overwrite the files for any newer plots
+```{r import_overwrite_plots}
+import_all_qs_plots(
+    from_figures_dir = "output/other_folder",
+    user = "Ryan",
+    overwrite_newer = TRUE
+)
+```
