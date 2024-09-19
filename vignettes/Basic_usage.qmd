@@ -15,24 +15,31 @@ library(ggplot2)
 
 ## Create some plots to save
 ```{r make_some_plots}
+plot_stuff <-
+    ggplot(mtcars, aes(x = mpg, y = wt)) +
+    geom_point()
+
 stash_plot(
-    ggplot(mtcars, aes(x = mpg, y = wt)) + geom_point(),
+    plot_stuff,
     plot_name = "mpg_wt"
 )
 
+plot_other_stuff <-
+    ggplot(mtcars, aes(x = mpg, y = qsec)) +
+    geom_point()
+
 stash_plot(
-    ggplot(mtcars, aes(x = mpg, y = qsec)) + geom_point(),
+    plot_other_stuff,
     plot_name = "mpg_qsec"
 )
 
-stash_plot(
-    ggplot(mtcars, aes(x = mpg, y = disp)) + geom_point(),
-    plot_name = "mpg_disp"
-)
+plot_more_stuff <-
+    ggplot(mtcars, aes(x = mpg, y = disp)) +
+    geom_point()
 
 stash_plot(
-    ggplot(mtcars, aes(x = mpg, y = hp)) + geom_point(),
-    plot_name = "mpg_hp"
+    plot_more_stuff,
+    plot_name = "mpg_disp"
 )
 ```
 
@@ -52,7 +59,6 @@ gridExtra::grid.arrange(
     get_plot("mpg_wt", verbose = FALSE),
     get_plot("mpg_qsec", verbose = FALSE),
     get_plot("mpg_disp", verbose = FALSE),
-    get_plot("mpg_hp", verbose = FALSE),
     ncol = 2
 )
 ```
@@ -61,14 +67,20 @@ gridExtra::grid.arrange(
 ```{r modify_plot}
 gridExtra::grid.arrange(
     get_plot("mpg_wt", verbose = FALSE) +
-        ggtitle("Miles per gallon vs weight"),
+        labs(
+            title = "Miles per gallon vs weight",
+            x = "Amazing!",
+            y = "Much Science!",
+            caption = "meh"
+            ) +
+        theme_dark(),
+
     get_plot("mpg_qsec", verbose = FALSE) +
         theme(axis.text = element_text(size = 20)),
+
     get_plot("mpg_disp", verbose = FALSE) +
         theme_bw(),
-    get_plot("mpg_hp", verbose = FALSE) +
-        labs(x = "Miles per gallon", y = "Horsepower") +
-        theme(axis.text = element_text(size = 20)),
+
     ncol = 2
 )
 ```
@@ -109,7 +121,6 @@ import_all_qs_plots(
 list_plots()
 ```
 
-
 ## Import all plots from another folder and overwrite newer
 This will overwrite the files for any newer plots
 ```{r import_overwrite_plots}
@@ -118,4 +129,13 @@ import_all_qs_plots(
     user = "Ryan",
     overwrite_newer = TRUE
 )
+```
+
+## Remove a plot
+```{r remove_plot}
+list_plots()
+
+remove_plot("mpg_wt")
+
+list_plots()
 ```
