@@ -44,7 +44,7 @@ stash_plot <- function(plot,
     file_name <- paste0(plot_name, "_", timestamp, ".qs")
     file_path <- file.path(figures_dir, file_name)
 
-    remove_old_plot(
+    remove_old_plot_file(
         plot_name,
         figures_dir = figures_dir,
         cleanup = cleanup
@@ -134,11 +134,11 @@ import_plot <- function(qs_file,
                 qs_file
             )
             message("Use overwrite_newer = TRUE to overwrite anyway.")
-            invisible()
+            return(invisible())
         }
     }
 
-    remove_old_plot(
+    remove_old_plot_file(
         plot_name,
         figures_dir = figures_dir,
         cleanup = cleanup
@@ -216,7 +216,7 @@ import_all_qs_plots <- function(from_figures_dir,
 #' @return None. This function is called for its side effects.
 #'
 #' @keywords internal
-remove_old_plot <- function(plot_name,
+remove_old_plot_file <- function(plot_name,
                             figures_dir = "output/figure_objs",
                             cleanup = TRUE) {
     # We don't need to keep old plots
