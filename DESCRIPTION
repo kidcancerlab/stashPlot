@@ -1,6 +1,6 @@
 Package: stashPlot
 Title: A Package to Stash and Manage Plot Objects with Metadata, Allowing Easy Reloading, Modification, and Assembly of Plots
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R:
     person(
         given = "Matthew",
