@@ -20,7 +20,8 @@ get_plot_metadata <- function(figures_dir = "output/figure_objs") {
             qs::qread(plot_metadata_file)
         )
     } else {
-        stop("No plot metadata file found.")
+        stop("No plot metadata file found.\nDo you need to specify a different",
+             " figures directory or stash some plots first?")
     }
 }
 
