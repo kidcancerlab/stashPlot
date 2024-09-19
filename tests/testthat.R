@@ -8,5 +8,6 @@
 
 library(testthat)
 library(stashPlot)
+library(ggplot2)
 
 test_check("stashPlot")
