@@ -4,6 +4,7 @@
 #'
 #' @param plot The plot object to be saved.
 #' @param plot_name A character string specifying the name of the plot.
+#' @param user A character string specifying the user who created the plot.
 #' @param figures_dir A character string specifying the directory to save the
 #'   plot to. The default is "output/figure_objs".
 #' @param compression A character string specifying the compression level to
@@ -22,14 +23,15 @@
 #' \dontrun{
 #'   library(ggplot2)
 #'   p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
-#'   save_plot(plot = p, plot_name = "mtcars_wt_mpg_scatter")
+#'   stash_plot(plot = p, plot_name = "mtcars_wt_mpg_scatter")
 #' }
-save_plot <- function(plot,
-                      plot_name,
-                      figures_dir = "output/figure_objs",
-                      compression = "high",
-                      cleanup = TRUE,
-                      verbose = TRUE) {
+stash_plot <- function(plot,
+                       plot_name,
+                       user = Sys.info()[["user"]],
+                       figures_dir = "output/figure_objs",
+                       compression = "high",
+                       cleanup = TRUE,
+                       verbose = TRUE) {
     # Ensure the output directory exists
     if (!dir.exists(figures_dir)) {
         dir.create(figures_dir, recursive = TRUE)
@@ -63,31 +65,32 @@ save_plot <- function(plot,
             plot_name = plot_name,
             file_path = file_path,
             timestamp = timestamp,
-            user = Sys.info()[["user"]]
+            user = user
         )
 
     qs::qsave(metadata, metadata_file)
 }
 
 
-#' Import Plot from QS File
+#' Import Plot from qs File
 #'
-#' This function imports a plot from a specified QS file.
+#' This function imports a plot from a specified qs file.
 #'
-#' @inheritParams save_plot
-#' @param qs_file A string representing the path to the QS file containing the
+#' @inheritParams stash_plot
+#' @param qs_file A string representing the path to the qs file containing the
 #'   plot data.
 #' @param user A string representing the user who imported the plot. The default
 #'   is "imported from file".
-#' @param force_overwrite A logical value indicating whether to overwrite a plot
+#' @param overwrite_newer A logical value indicating whether to overwrite a plot
 #'   file even if the new one is older. The default is FALSE.
 #'
 #' @return The imported plot object.
 #'
 #' @examples
-#' # Example usage:
-#' plot <- import_plot("path/to/your/plot.qs")
-#'
+#' \dontrun{
+#'   # Example usage:
+#'   plot <- import_plot("path/to/your/plot.qs")
+#' }
 #' @export
 import_plot <- function(qs_file,
                         figures_dir = "output/figure_objs",
@@ -102,9 +105,9 @@ import_plot <- function(qs_file,
             message(
                 "The qs file should look like this: ",
                 "plot_name_YYYY_MM_DD_HH.MM.SS.qs and should have been created",
-                "by the save_plot function."
+                "by the stash_plot function."
             )
-            stop("This does not look like a file from the save_plot function.")
+            stop("This does not look like a file from the stash_plot function.")
     }
 
     plot_name <- get_plot_name_from_qs_file(qs_file)
@@ -131,7 +134,7 @@ import_plot <- function(qs_file,
                 qs_file
             )
             message("Use overwrite_newer = TRUE to overwrite anyway.")
-            return()
+            invisible()
         }
     }
 
@@ -170,7 +173,7 @@ import_plot <- function(qs_file,
 #' @inheritParams import_plot
 #' @param from_figures_dir A character string specifying the directory
 #'   containing the qs plot files to be imported. These must have been created
-#'   by the save_plot function.
+#'   by the stash_plot function.
 #' @param to_figures_dir A character string specifying the directory to save the
 #'   imported plots to. The default is "output/figure_objs".
 #'
@@ -208,7 +211,7 @@ import_all_qs_plots <- function(from_figures_dir,
 #'
 #' This function removes an old plot file if it exists.
 #'
-#' @inheritParams save_plot
+#' @inheritParams stash_plot
 #'
 #' @return None. This function is called for its side effects.
 #'

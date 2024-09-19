@@ -2,7 +2,7 @@
 #'
 #' This function retrieves a plot object based on the provided plot name.
 #'
-#' @inheritParams save_plot
+#' @inheritParams stash_plot
 #'
 #' @return The plot object corresponding to the given plot name.
 #' @examples

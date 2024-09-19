@@ -1,4 +1,4 @@
-# JugglePlot
+# stash_plot
 
 
 the goal is to save off the plot object and maintain metadata on when it was created

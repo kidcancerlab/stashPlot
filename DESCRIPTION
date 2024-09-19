@@ -1,5 +1,5 @@
-Package: jugglePlot
-Title: A Package to Save and Manage Plot Objects with Metadata, Allowing Easy Reloading, Modification, and Assembly of Plots.
+Package: stashPlot
+Title: A Package to Stash and Manage Plot Objects with Metadata, Allowing Easy Reloading, Modification, and Assembly of Plots
 Version: 0.0.0.9000
 Authors@R:
     person(
@@ -8,12 +8,23 @@ Authors@R:
         email = "matthewvc1@gmail.com",
         role = c("aut", "cre")
     )
-Description: What the package does (one paragraph).
+Description: A package to stash and manage plot objects with metadata, allowing
+    easy reloading, modification, and assembly of plots. This package is
+    designed to help manage the complexity of creating and modifying plots in
+    R, especially when the plots are created in multiple steps or when the
+    plots are created by multiple people. The package provides a way to save
+    plot objects to disk, along with metadata about the plot. The package also
+    provides a way to reload the plot objects and metadata so one can modify the
+    plots and assemble the plots into a final plot. The package is designed to
+    work with the 'ggplot2' package, but it can be used with other plotting
+    packages as well.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Suggests:
+    ggplot2,
+    gridExtra,
     knitr,
     quarto,
     rmarkdown,
@@ -21,6 +32,8 @@ Suggests:
 Config/testthat/edition: 3
 Imports:
     dplyr,
+    lubridate,
     qs,
-    stringr
+    stringr,
+    utils
 VignetteBuilder: quarto

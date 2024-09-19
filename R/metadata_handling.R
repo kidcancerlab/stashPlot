@@ -3,7 +3,7 @@
 #' This function reads a plot metadata file and returns its contents as a data
 #' frame.
 #'
-#' @inheritParams save_plot
+#' @inheritParams stash_plot
 #'
 #' @return A data frame containing the plot metadata if the file exists.
 #'
@@ -28,7 +28,7 @@ get_plot_metadata <- function(figures_dir = "output/figure_objs") {
 #'
 #' This function retrieves the file names associated with a given plot name.
 #'
-#' @inheritParams save_plot
+#' @inheritParams stash_plot
 #'
 #' @return A character vector containing the file names associated with the
 #'   specified plot name.
@@ -52,7 +52,7 @@ get_plot_name_files <- function(plot_name,
 #'
 #' This function checks whether a plot file with the given name already exists.
 #'
-#' @inheritParams save_plot
+#' @inheritParams stash_plot
 #'
 #' @return A logical value indicating whether the plot file name exists (TRUE)
 #'   or not (FALSE).

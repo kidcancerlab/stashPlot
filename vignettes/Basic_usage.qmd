@@ -9,28 +9,28 @@ lightbox: true
 ---
 
 ```{r setup}
-library(jugglePlot)
+library(stashPlot)
 library(ggplot2)
 ```
 
 ## Create some plots to save
 ```{r make_some_plots}
-save_plot(
+stash_plot(
     ggplot(mtcars, aes(x = mpg, y = wt)) + geom_point(),
     plot_name = "mpg_wt"
 )
 
-save_plot(
+stash_plot(
     ggplot(mtcars, aes(x = mpg, y = qsec)) + geom_point(),
     plot_name = "mpg_qsec"
 )
 
-save_plot(
+stash_plot(
     ggplot(mtcars, aes(x = mpg, y = disp)) + geom_point(),
     plot_name = "mpg_disp"
 )
 
-save_plot(
+stash_plot(
     ggplot(mtcars, aes(x = mpg, y = hp)) + geom_point(),
     plot_name = "mpg_hp"
 )
@@ -85,13 +85,13 @@ import_plot(
 
 ### lets make some plots in a different folder
 ```{r make_plots_in_other_folder}
-save_plot(
+stash_plot(
     ggplot(mtcars, aes(x = as.factor(cyl), y = wt)) + geom_point(),
     plot_name = "other_plot_1",
     figures_dir = "output/other_folder"
 )
 
-save_plot(
+stash_plot(
     ggplot(mtcars, aes(x = as.factor(cyl), y = qsec)) + geom_point(),
     plot_name = "other_plot_2",
     figures_dir = "output/other_folder"

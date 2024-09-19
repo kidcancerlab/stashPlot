@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(jugglePlot)
+library(stashPlot)
 
-test_check("jugglePlot")
+test_check("stashPlot")

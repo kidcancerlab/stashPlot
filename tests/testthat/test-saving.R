@@ -2,7 +2,7 @@ test_that("saving a plot works", {
     if (file.exists("output/figure_objs/plot_metadata.qs")) {
         file.remove("output/figure_objs/plot_metadata.qs")
     }
-    save_plot(
+    stash_plot(
         plot = ggplot2::ggplot(
             mtcars,
             ggplot2::aes(x = wt, y = mpg)

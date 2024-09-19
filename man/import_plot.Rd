@@ -2,7 +2,7 @@
 % Please edit documentation in R/saving.R
 \name{import_plot}
 \alias{import_plot}
-\title{Import Plot from QS File}
+\title{Import Plot from qs File}
 \usage{
 import_plot(
   qs_file,
@@ -14,7 +14,7 @@ import_plot(
 )
 }
 \arguments{
-\item{qs_file}{A string representing the path to the QS file containing the
+\item{qs_file}{A string representing the path to the qs file containing the
 plot data.}
 
 \item{figures_dir}{A character string specifying the directory to save the
@@ -29,17 +29,18 @@ when writing out a new plot with the same plot_name. The default is TRUE.}
 \item{verbose}{A logical value indicating whether to print messages. The
 default is TRUE.}
 
-\item{force_overwrite}{A logical value indicating whether to overwrite a plot
+\item{overwrite_newer}{A logical value indicating whether to overwrite a plot
 file even if the new one is older. The default is FALSE.}
 }
 \value{
 The imported plot object.
 }
 \description{
-This function imports a plot from a specified QS file.
+This function imports a plot from a specified qs file.
 }
 \examples{
-# Example usage:
-plot <- import_plot("path/to/your/plot.qs")
-
+\dontrun{
+  # Example usage:
+  plot <- import_plot("path/to/your/plot.qs")
+}
 }

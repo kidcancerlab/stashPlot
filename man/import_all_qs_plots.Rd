@@ -15,7 +15,7 @@ import_all_qs_plots(
 \arguments{
 \item{from_figures_dir}{A character string specifying the directory
 containing the qs plot files to be imported. These must have been created
-by the save_plot function.}
+by the stash_plot function.}
 
 \item{to_figures_dir}{A character string specifying the directory to save the
 imported plots to. The default is "output/figure_objs".}
@@ -25,6 +25,9 @@ is "imported from file".}
 
 \item{cleanup}{A logical value indicating whether to remove old plot files
 when writing out a new plot with the same plot_name. The default is TRUE.}
+
+\item{overwrite_newer}{A logical value indicating whether to overwrite a plot
+file even if the new one is older. The default is FALSE.}
 }
 \value{
 A list of imported QS plots.
