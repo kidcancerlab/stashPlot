@@ -98,6 +98,11 @@ import_plot <- function(qs_file,
                         cleanup = TRUE,
                         verbose = TRUE,
                         overwrite_newer = FALSE) {
+    # Ensure the output directory exists
+    if (!dir.exists(figures_dir)) {
+        dir.create(figures_dir, recursive = TRUE)
+    }
+
     if (!grepl(
         x = basename(qs_file),
         pattern = ".+_[0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}\\.qs",
