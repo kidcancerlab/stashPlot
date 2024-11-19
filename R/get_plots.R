@@ -30,7 +30,38 @@ get_plot <- function(plot_name,
             )
     }
 
-    return(qs::qread(plot_file))
+    plot_data <-
+        tryCatch(
+            qs::qread(plot_file),
+            error = function(e) {
+                message(
+                    "Error reading plot file. ",
+                    "The file may be corrupted or missing.",
+                    " Error message: ", e
+                )
+                return(NULL)
+            },
+            warning = function(w) {
+                if (grep("PROMSXP detected, replacing with NULL", w$message)) {
+                    message(
+                        "Error reading in file due to a known issue with qs. ",
+                        "To fix this issue, run the following command:\n\n",
+                        "qs::set_trust_promises(TRUE)\n\n",
+                        "See: https://github.com/qsbase/qs/issues/93."
+                    )
+                    return(NULL)
+                } else {
+                    message(
+                        "Warning reading plot file. ",
+                        "The file may be corrupted or missing.",
+                        " Warning message: ", w
+                    )
+                return(NULL)
+                }
+            }
+        )
+
+    return(plot_data)
 }
 
 #' List Plot Files
